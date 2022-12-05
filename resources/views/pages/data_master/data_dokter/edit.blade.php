@@ -42,7 +42,7 @@
                     <div class="form-group">
                         <p for="role">Spesialis</p>
                         <select id="spesialis" name="spesialis" class="form-control">
-                            <option value="{{ $dokter->spesialis }}">{{ $dokter->spesialis }}</option>
+                            <option value="{{ $dokter->poli->nama_poli }}">{{ $dokter->poli->nama_poli }}</option>
                             <option {{ $dokter->spesialis == 'poli dalam' ? 'selected' : '' }} value="poli dalam">Poli
                                 Dalam</option>
                             <option {{ $dokter->spesialis == 'umum' ? 'selected' : '' }} value="umum">Umum</option>

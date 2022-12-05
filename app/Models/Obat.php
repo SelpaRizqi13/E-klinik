@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Obat extends Model
 {
     use HasFactory;
+
+    public function resep() 
+    {
+        # code...
+        return $this->hasMany(Resep::class);
+    }
 }

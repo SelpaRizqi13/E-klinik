@@ -27,6 +27,18 @@ class PoliTableSeeder extends Seeder
                 'nama_poli'=>'Poli Umum',
                 'lantai'=>'2',
             ],
+            [
+                'nama_poli'=>'Poli Dalam',
+                'lantai'=>'4',
+            ],
+            [
+                'nama_poli'=>'Apotek',
+                'lantai'=>'1',
+            ],
+            [
+                'nama_poli'=>'Poli Anak',
+                'lantai'=>'3',
+            ],
 
         ];
         foreach ($polis as $key => $value) {

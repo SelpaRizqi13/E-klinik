@@ -14,6 +14,12 @@ use App\Http\Controllers\WilayahController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PoliController;
+use App\Http\Controllers\RekamController;
+use App\Http\Controllers\PemeriksaanController;
+use App\Http\Controllers\ResepController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +54,13 @@ Route::middleware(['guest'])->group(function () {
     Route::resource('tagihan', TagihanController::class);
     Route::resource('wilayah', WilayahController::class);
     Route::resource('dokter', DokterController::class);
+    Route::resource('pemeriksaan', PemeriksaanController::class);
+    Route::resource('resep', ResepController::class);
     Route::resource('pendaftaran', PendaftaranController::class);
+    Route::resource('rekam', RekamController::class);
+    Route::post('getdatakabupaten', [PasienController::class, 'kabupaten'])->name('getdatakabupaten');
+    Route::post('getdatakecamatan', [PasienController::class, 'kecamatan'])->name('getdatakecamatan');
+    Route::post('getdatadesa', [PasienController::class, 'desa'])->name('getdatadesa');
 
     //hapus data
     Route::get('delete_user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
@@ -61,4 +73,8 @@ Route::middleware(['guest'])->group(function () {
 
     //logout
     Route::post('/logout', [LoginController::class, 'logout']);
+
+
+    //print
+    Route::get('/export_pdf/{id}',[TagihanController::class,'cetak_pdf']);
 });

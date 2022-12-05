@@ -18,27 +18,27 @@ class TindakanTableSeeder extends Seeder
     {
         $tindakans =[
             [
-                'kode_tindakan'=>'T001',
+                'kode_tindakan'=>'T0001',
                 'nama_tindakan' => 'Injeksi',
                 'harga'=>'15000'
             ],
             [
-                'kode_tindakan'=>'T002',
+                'kode_tindakan'=>'T0002',
                 'nama_tindakan' => 'Pasang Infus',
                 'harga'=>'32000'
             ],
             [
-                'kode_tindakan'=>'T003',
+                'kode_tindakan'=>'T0003',
                 'nama_tindakan' => 'Buka Gips',
                 'harga'=>'90000'
             ],
             [
-                'kode_tindakan'=>'T004',
+                'kode_tindakan'=>'T0004',
                 'nama_tindakan' => 'Ganti Perban',
                 'harga'=>'25000'
             ],
             [
-                'kode_tindakan'=>'T005',
+                'kode_tindakan'=>'T0005',
                 'nama_tindakan' => 'Rawat Inap',
                 'harga'=>'85000'
             ],

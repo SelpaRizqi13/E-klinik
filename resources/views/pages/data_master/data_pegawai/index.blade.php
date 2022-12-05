@@ -39,18 +39,20 @@
                             <th>No</th>
                             <th>Nama</th>
                             <th>Jenis Kelamin</th>
-                            <th>Jabatan</th>
+                            <th>Posisi/Bagian</th>
                             <th>Alamat</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $no = 1; ?>
+
                         @foreach ($pegawais as $key => $value)
                             <tr>
-                                <td>1</td>
+                                <td>{{ $no }}</td>
                                 <td>{{ $value->nama_pegawai }}</td>
                                 <td>{{ $value->jenis_kelamin }}</td>
-                                <td>{{ $value->jabatan }}</td>
+                                <td>{{ $value->poli->nama_poli }}</td>
                                 <td>{{ $value->alamat }}</td>
                                 <td class="text-center">
                                     <a class="btn btn-info btn-sm" href="{{ url('pegawai/' . $value->id) }}"><i
@@ -64,6 +66,8 @@
                                     </a>
                                 </td>
                             </tr>
+                            <?php $no++; ?>
+
                         @endforeach
 
                     </tbody>

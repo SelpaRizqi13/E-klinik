@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call([
         UserTableSeeder::class,
+        PoliTableSeeder::class,
         PegawaiTableSeeder::class,
         TindakanTableSeeder::class,
         ObatTableSeeder::class,
@@ -24,7 +25,6 @@ class DatabaseSeeder extends Seeder
         WilayahTableSeeder::class,
         TagihanTableSeeder::class,
         IndoRegionSeeder::class,
-        PoliTableSeeder::class,
         
 
         

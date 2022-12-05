@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Pasien;
 use App\Models\Dokter;
 use App\Models\Pegawai;
@@ -10,11 +11,11 @@ use App\Models\Pemeriksaan;
 use App\Models\Obat;
 use App\Models\Rekam;
 use App\Models\Resep;
-use App\Models\Tagihan;
-use Illuminate\Http\Request;
-use PDF;
 
-class TagihanController extends Controller
+use DB;
+use Illuminate\Http\Request;
+
+class PemeriksaanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,10 +25,9 @@ class TagihanController extends Controller
     public function index()
     {
         //
-        
-        $pasiens = Pasien::all();
+        $pemeriksaan=Pemeriksaan::all();
 
-        return view('pages.tagihan.index', compact('pasien'));
+        return view('pages.data_pasien.show', compact('pemeriksaan'));
     }
 
     /**
@@ -38,6 +38,14 @@ class TagihanController extends Controller
     public function create()
     {
         //
+        $getPasien=Pasien::all();
+        $getDokter=Dokter::all();
+        $getPegawai=Pegawai::all();
+        $getTindakan=Tindakan::all();
+        $getObat=Obat::all();
+        
+
+        return view('includes.modal_tindakan', compact('getPasien','getDokter','getPegawai','getTindakan','getObat'));
     }
 
     /**
@@ -48,25 +56,43 @@ class TagihanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        
+
+        $pemeriksaan = new Pemeriksaan();
+        $pemeriksaan->pasien_id=$request->pasien_id;
+        $pemeriksaan->tindakan_id=$request->tindakan_id;
+        $pemeriksaan->dokter_id=$request->dokter_id;
+        $pemeriksaan->pegawai_id=$request->pegawai_id;
+        $pemeriksaan->keluhan=$request->keluhan;
+        $pemeriksaan->diagnosa=$request->diagnosa;
+        $pemeriksaan->perkembangan=$request->perkembangan;
+        
+        // $pemeriksaan->tarif=$request->tindakan_id;
+        $pemeriksaan->tanggal_pemeriksaan=$request->tanggal_pemeriksaan;
+        $pemeriksaan->save();
+
+        
+
+        return redirect('pasien')->with('success', 'Data tindakan berhasil ditambahkan');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tagihan  $tagihan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
+        //
         $pasien = Pasien::find($id);
         $pemeriksaan = Pemeriksaan::where('pasien_id',$id)->get();
 
         $harga_total = 0;
         $harga_totobat=0;
-        $harga_periksa=0;
         $total=0;
-        $total_obat=0;
+        $jumlah_obat=0;
         $harga_obat=0;
 
         $getPasien=Pasien::all();
@@ -77,15 +103,13 @@ class TagihanController extends Controller
         $getResep=Resep::where('pasien_id',$id)->get();
         
         // $getObat=Obat::all();
-        return view('pages.tagihan.show', compact('pasien','getPasien','getDokter','getPegawai','getTindakan', 'pemeriksaan', 'total_obat','getObat', 'getResep','total','harga_totobat','harga_obat','harga_periksa'));
-
-
+        return view('pages.data_pasien.show', compact('pasien','getPasien','getDokter','getPegawai','getTindakan', 'pemeriksaan', 'harga_total','getObat', 'getResep','total','harga_totobat','jumlah_obat','harga_obat'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Tagihan  $tagihan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -97,7 +121,7 @@ class TagihanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tagihan  $tagihan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -108,40 +132,11 @@ class TagihanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tagihan  $tagihan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
-    }
-
-    public function cetak_pdf($id)
-    {
-        $tagihan = Pegawai::all();
-        $pasien = Pasien::find($id);
-        $pemeriksaan = Pemeriksaan::where('pasien_id',$id)->get();
-
-        $harga_total = 0;
-        $harga_totobat=0;
-        $harga_periksa=0;
-        $total=0;
-        $total_obat=0;
-        $harga_obat=0;
-
-        $getPasien=Pasien::all();
-        $getDokter=Dokter::all();
-        $getPegawai=Pegawai::all();
-        $getTindakan=Tindakan::all();
-        $getObat=Obat::all();
-        $getResep=Resep::where('pasien_id',$id)->get();
-
-        $path = base_path('public/image/logo.png');
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $pic ='data:image/' .$type. ';base64,' .base64_encode($data);
-
-    	$pdf = PDF::loadview('pages.tagihan.print_pdf',compact('pic','pasien','getPasien','getDokter','getPegawai','getTindakan', 'pemeriksaan', 'total_obat','getObat', 'getResep','total','harga_totobat','harga_obat','harga_periksa'));
-    	return $pdf->download('laporan-ptagihan.pdf');
     }
 }

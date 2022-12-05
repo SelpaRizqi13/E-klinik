@@ -7,22 +7,26 @@
                 <div class="col-auto my-auto ms-4">
                     <div class="h-100">
                         <h5 class="mb-1">
-                            Data Wilayah
+                            Data Pasien
                         </h5>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="container-fluid py-4">
         <div class="card">
+
             @if (Session::has('success'))
                 <p class="alert alert-success mt-4 mx-3">{{ Session::get('success') }}</p>
             @endif
+
+
             <div class="table-responsive mx-4 mb-5 mt-4">
                 <div class="row">
                     <div class="col-4">
-                        <a class="btn btn-success" href="{{ url('wilayah/create') }}"><i class="fa fa-plus"></i>
+                        <a class="btn btn-success" href="{{ url('pasien/create') }}"><i class="fa fa-plus"></i>
                             Tambah Data</a>
                     </div>
                     <div class="col-8 text-end">
@@ -34,35 +38,38 @@
                     <thead>
                         <tr class="text-center">
                             <th>No</th>
-                            <th>Nama Provinsi </th>
-                            {{-- <th>Nama Provinsi </th> --}}
+                            <th>No Rekam Medis</th>
+                            <th>Nama Pasien</th>
+                            <th>No Handphone</th>
+                            <th>Tanggal Pendaftaran</th>
+                            <th>Alamat</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $no = 1; ?>
-                        @foreach ($provinces as $key => $value)
+                        @foreach ($pasiens as $key => $value)
                             <tr>
-                                <td class="text-center">{{ $no }}</td>
-                                <td>{{ $value->name }}</td>
-                                {{-- <td>{{ $value->district->name }}</td> --}}
-
+                                <td>{{ $no }}</td>
+                                <td>{{ $value->no_rm }}</td>
+                                <td>{{ $value->nama_pasien }}</td>
+                                <td>{{ $value->no_hp }}</td>
+                                <td>{{ $value->tanggal_pendaftaran }}</td>
+                                <td>{{ $value->alamat }}</td>
                                 <td class="text-center">
-                                    <a class="btn btn-info btn-sm" href="{{ url('/' . $value->id) }}"><i
-                                            class="fa fa-eye"></i>
+                                    <a class="btn btn-warning btn-sm" href="{{ url('tagihan/' . $value->id) }}"><i
+                                            class="fa fa-eye"></i> Tagihan
                                     </a>
-                                    <a class="btn btn-success btn-sm" href="{{ url('/' . $value->id . '/edit') }}">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <a class="btn btn-danger btn-sm delete" data-id="{{ $value->id }}" type="submit"> <i
-                                            class="fa fa-trash-alt"></i>
-                                    </a>
+
                                 </td>
                             </tr>
                             <?php $no++; ?>
                         @endforeach
+
                     </tbody>
                 </table>
+
+
             </div>
         </div>
     </div>
@@ -89,7 +96,7 @@
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        window.location = "delete_user/" + userid + ""
+                        window.location = "delete_pasien/" + userid + ""
                         swal("Data berhasil dihapus", {
                             icon: "success",
                         });

@@ -1,8 +1,9 @@
 <?php
-
+ 
 namespace App\Http\Controllers;
 
 use App\Models\Tindakan;
+use DB;
 use Illuminate\Http\Request;
 
 class TindakanController extends Controller
@@ -22,11 +23,21 @@ class TindakanController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function create()
     {
+        $getkode = DB::table('tindakans')->select(DB::raw('MAX(RIGHT(kode_tindakan, 4)) as kode'));
+        $kd = '';
+        if ($getkode->count() > 0) {
+            foreach ($getkode->get() as $k) {
+                $tmp = ((int) $k->kode) + 1;
+                $kd = sprintf('%04s', $tmp);
+            }
+        } else {
+            $kd = '0001';
+        }
         $tindakan = new Tindakan();
-        return view('pages.data_master.data_tindakan.create', compact('tindakan'));
+        return view('pages.data_master.data_tindakan.create', compact('tindakan','kd'));
     }
 
     /**

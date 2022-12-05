@@ -24,7 +24,8 @@
                     <div class="form-group">
                         <p>Kode Tindakan</p>
                         <input type="text" name="kode_tindakan" value="{{ $tindakan->kode_tindakan }}"
-                            class="form-control @error('kode_tindakan') is-invalid @enderror" id="kode_tindakan" required>
+                            class="form-control @error('kode_tindakan') is-invalid @enderror" id="kode_tindakan" required
+                            readonly>
                         @error('kode_tindakan')
                             <div class="invalid-feedback mb-3" style="display: block;">
                                 {{ $message }}

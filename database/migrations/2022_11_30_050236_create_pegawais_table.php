@@ -15,10 +15,12 @@ class CreatePegawaisTable extends Migration
     {
         Schema::create('pegawais', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_pegawai');
+            $table->bigInteger('poli_id')->unsigned();
+            $table->foreign('poli_id')->references('id')->on('polis')->onDelete('cascade');
+            $table->string('nama_pegawai'); 
             $table->date('tanggal_lahir');
             $table->string('jenis_kelamin');
-            $table->string('jabatan');
+            // $table->string('jabatan');
             $table->string('no_hp');
             $table->string('alamat');
             $table->timestamps();

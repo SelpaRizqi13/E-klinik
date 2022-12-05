@@ -7,7 +7,7 @@
                 <div class="col-auto my-auto ms-4">
                     <div class="h-100">
                         <h5 class="mb-1">
-                            Tambah Data Pasien
+                            Formulir Pendaftaran Pasien
                         </h5>
                     </div>
                 </div>
@@ -32,8 +32,9 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Tanggal Pendaftaran</label>
-                                <input type="date" class="form-control" id="tanggal_pendaftaran" name="tanggal_pendaftaran"
-                                    placeholder="No Handphone">
+
+                                <input type="date" class="form-control" id="tanggal_pendaftaran" readonly=""
+                                    name="tanggal_pendaftaran" value="{{ now()->toDateString() }}">
                             </div>
                         </div>
                     </div>
@@ -101,8 +102,17 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Agama</label>
-                                <input type="text" class="form-control" id="agama" name="agama" placeholder="agama">
+                                <select id="agama" name="agama" class="form-control">
+                                    <option value="">--Pilih Agama--</option>
+                                    <option value="Islam">Islam</option>
+                                    <option value="Protestan">Protestan</option>
+                                    <option value="Katolik">Katolik</option>
+                                    <option value="Hindu">Hindu</option>
+                                    <option value="Budha">Budha</option>
+                                    <option value="Khonghucu">Khonghucu</option>
+                                </select>
                             </div>
+
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -135,9 +145,12 @@
                     </div>
                     <div class="form-group">
                         <label for="">Provinsi</label>
-                        <input type="text" name="provinsi" value="{{ old('provinsi') }}"
-                            class="form-control @error('provinsi') is-invalid @enderror" id="provinsi"
-                            placeholder="provinsi" required>
+                        <select name="provinsi" id="provinsi" class="form-control">
+                            <option value="">--Pilih Provinsi--</option>
+                            @foreach ($getProvinsi as $provinsi)
+                                <option value="{{ $provinsi->id }}">{{ $provinsi->name }}</option>
+                            @endforeach
+                        </select>
                         @error('provinsi')
                             <div class="invalid-feedback mb-3" style="display: block;">
                                 {{ $message }}
@@ -146,9 +159,11 @@
                     </div>
                     <div class="form-group">
                         <label for="">Kabupaten</label>
-                        <input type="text" name="kabupaten" value="{{ old('kabupaten') }}"
-                            class="form-control @error('kabupaten') is-invalid @enderror" id="kabupaten"
-                            placeholder="kabupaten" required>
+                        <select name="kabupaten" class="form-control @error('kabupaten') is-invalid @enderror"
+                            id="kabupaten">
+
+                            <option value="">--Pilih Kabupaten--</option>
+                        </select>
                         @error('kabupaten')
                             <div class="invalid-feedback mb-3" style="display: block;">
                                 {{ $message }}
@@ -157,9 +172,11 @@
                     </div>
                     <div class="form-group">
                         <label for="">Kecamatan</label>
-                        <input type="text" name="kecamatan" value="{{ old('kecamatan') }}"
-                            class="form-control @error('kecamatan') is-invalid @enderror" id="kecamatan"
-                            placeholder="kecamatan" required>
+                        <select name="kecamatan" class="form-control @error('kecamatan') is-invalid @enderror"
+                            id="kecamatan">
+
+                            <option value="" {{ old('kecamatan') == '' ? 'selected' : '' }}>--Pilih Kecamatan--</option>
+                        </select>
                         @error('kecamatan')
                             <div class="invalid-feedback mb-3" style="display: block;">
                                 {{ $message }}
@@ -168,8 +185,10 @@
                     </div>
                     <div class="form-group">
                         <label for="">Desa</label>
-                        <input type="text" name="desa" value="{{ old('desa') }}"
-                            class="form-control @error('desa') is-invalid @enderror" id="desa" placeholder="desa" required>
+                        <select name="desa" class="form-control @error('desa') is-invalid @enderror" id="desa">
+
+                            <option value="" {{ old('desa') == '' ? 'selected' : '' }}>--Pilih Desa--</option>
+                        </select>
                         @error('desa')
                             <div class="invalid-feedback mb-3" style="display: block;">
                                 {{ $message }}
@@ -178,10 +197,9 @@
                     </div>
                     <div class="form-group">
                         <label for="">Alamat</label>
-                        <textarea type="text" name="alamat" value="{{ old('alamat') }}"
-                            class="form-control @error('alamat') is-invalid @enderror" id="alamat" placeholder="Alamat"
-                            required>
-                                                                            </textarea>
+                        <textarea name="alamat" class="form-control @error('alamat') is-invalid @enderror" id="alamat"
+                            placeholder="Alamat" required></textarea>
+                        </textarea>
                         @error('alamat')
                             <div class="invalid-feedback mb-3" style="display: block;">
                                 {{ $message }}
@@ -217,15 +235,17 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Alamat</label>
-                                <textarea type="text" class="form-control" id="alamat_penjawab" name="alamat_penjawab"
-                                    placeholder="Alamat">
-                                                        </textarea>
+                                <textarea name="alamat_penjawab"
+                                    class="form-control @error('alamat_penjawab') is-invalid @enderror" id="alamat_penjawab"
+                                    placeholder="Alamat" required></textarea>
+                                </textarea>
+                                </textarea>
                             </div>
                         </div>
                     </div>
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary">Simpan</button>
-                        <a class="btn btn-success" href="{{ url('dokter') }}">
+                        <a class="btn btn-success" href="{{ url('pasien') }}">
                             Cancel</a>
                     </div>
 
@@ -235,3 +255,65 @@
         </div>
     </div>
 @endsection
+
+@push('add-js')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $(function() {
+            $('#provinsi').on('change', function() {
+                let id_provinsi = $('#provinsi').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('getdatakabupaten') }}",
+                    data: {
+                        id_provinsi: id_provinsi
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $('#kabupaten').html(msg);
+                    }
+                })
+            })
+            $('#kabupaten').on('change', function() {
+                let id_kabupaten = $('#kabupaten').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('getdatakecamatan') }}",
+                    data: {
+                        id_kabupaten: id_kabupaten
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $('#kecamatan').html(msg);
+                    }
+                })
+            })
+            $('#kecamatan').on('change', function() {
+                let id_kecamatan = $('#kecamatan').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('getdatadesa') }}",
+                    data: {
+                        id_kecamatan: id_kecamatan
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $('#desa').html(msg);
+                    }
+                })
+            })
+        })
+
+    </script>
+@endpush

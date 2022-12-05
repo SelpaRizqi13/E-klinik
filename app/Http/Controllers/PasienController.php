@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Province;
+use App\Models\Regency;
+use App\Models\District;
+use App\Models\Village;
 use App\Models\Pasien;
 use Illuminate\Http\Request;
 use DB;
+use DateTime;
 
 class PasienController extends Controller
 {
@@ -25,7 +30,7 @@ class PasienController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $getkode = DB::table('pasiens')->select(DB::raw('MAX(RIGHT(no_rm, 4)) as kode'));
         $kd = '';
@@ -37,9 +42,16 @@ class PasienController extends Controller
         } else {
             $kd = '0001';
         }
-        $pasien= new Pasien();
 
-        return view('pages.data_pasien.create', compact('pasien', 'kd'));
+    
+        $getProvinsi = Province::all();
+        $getKabupaten = Regency::all();
+        $getKecamatan = District::all();
+        $getDesa = Village::all();
+        $pasien= new Pasien();
+        $ldate = date('dd-mm-yyyy');
+
+        return view('pages.data_pasien.create', compact('getKecamatan','getDesa','pasien','getKabupaten', 'kd', 'getProvinsi','ldate'));
     }
 
     /**
@@ -63,7 +75,7 @@ class PasienController extends Controller
         $pasien->status = $request->status;
         $pasien->pekerjaan= $request->pekerjaan;
         $pasien->no_hp= $request->no_hp;
-        $pasien->provinsi= $request->provinsi;
+        $pasien->prov_id= $request->provinsi;
         $pasien->kabupaten= $request->kabupaten;
         $pasien->kecamatan= $request->kecamatan;
         $pasien->desa= $request->desa;
@@ -97,9 +109,13 @@ class PasienController extends Controller
      */
     public function edit($id)
     {
+        $getProvinsi = Province::all();
+        $getKabupaten = Regency::all();
+        $getKecamatan = District::all();
+        $getDesa = Village::all();
         $pasien = Pasien::find($id);
 
-        return view('pages.data_pasien.edit', compact('pasien'));
+        return view('pages.data_pasien.edit', compact('pasien', 'getDesa', 'getKecamatan', 'getKabupaten', 'getProvinsi'));
     }
 
     /**
@@ -125,7 +141,7 @@ class PasienController extends Controller
         $pasien->status = $request->status;
         $pasien->pekerjaan= $request->pekerjaan;
         $pasien->no_hp= $request->no_hp;
-        $pasien->provinsi= $request->provinsi;
+        $pasien->prov_id= $request->provinsi;
         $pasien->kabupaten= $request->kabupaten;
         $pasien->kecamatan= $request->kecamatan;
         $pasien->desa= $request->desa;
@@ -134,6 +150,7 @@ class PasienController extends Controller
         $pasien->s_hubungan= $request->s_hubungan;
         $pasien->no_hp_penjawab= $request->no_hp_penjawab;
         $pasien->alamat_penjawab= $request->alamat_penjawab;
+        
         $pasien->save();
 
         return redirect('pasien')->with('success', 'Data Pasien Berhasil diupdate');
@@ -152,5 +169,46 @@ class PasienController extends Controller
         $model->delete();
 
         return redirect('pasien');
+    }
+
+    
+    public function kabupaten(request $request)
+    {
+        $id_provinsi = $request->id_provinsi;
+        
+        $kabupatens = Regency::where('province_id',$id_provinsi)->get();
+        $option = "<option>--Pilih Kabupaten--</option>";
+        
+        foreach ($kabupatens as $key => $kabupaten) {
+            # code...
+            $option.= "<option value='$kabupaten->id'>$kabupaten->name</option>";
+        }
+        echo $option;
+    }
+    public function kecamatan(Request $request)
+    {
+        $id_kabupaten = $request->id_kabupaten;
+    
+        $kecamatans = District::where('regency_id',$id_kabupaten)->get();
+    
+        $option = "<option>--Pilih Kecamatan--</option>";
+        foreach ($kecamatans as $key => $kecamatan) {
+            # code...
+            $option.= "<option value='$kecamatan->id'>$kecamatan->name</option>";
+        }
+        echo $option;
+    }
+    public function desa(Request $request)
+    {
+        $id_kecamatan = $request->id_kecamatan;
+    
+        $villages = Village::where('district_id',$id_kecamatan)->get();
+
+        $option = "<option>--Pilih Desa--</option>";
+        foreach ($villages as $key => $desa) {
+            # code...
+            $option.= "<option value='$desa->id'>$desa->name</option>";
+        }
+        echo $option;
     }
 }

@@ -22,7 +22,7 @@
                     @csrf
                     <div class="form-group">
                         <p>Kode Obat</p>
-                        <input type="text" name="kode_obat" value="{{ old('kode_obat') }}"
+                        <input type="text" name="kode_obat" readonly="" value="{{ 'OB-' . $kd }}"
                             class="form-control @error('kode_obat') is-invalid @enderror" id="kode_obat" required>
                         @error('kode_obat')
                             <div class="invalid-feedback mb-3" style="display: block;">

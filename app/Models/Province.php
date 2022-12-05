@@ -23,7 +23,7 @@ class Province extends Model
      *
      * @var string
      */
-    protected $table = 'provinces';
+    // protected $table = 'provinces'; 
 
     /**
      * Province has many regencies.
@@ -34,4 +34,11 @@ class Province extends Model
     {
         return $this->hasMany(Regency::class);
     }
+
+    public function pasien()
+    {
+        return $this->hasMany(Pasien::class, 'prov_id', 'id');
+    }
+
+
 }

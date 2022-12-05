@@ -40,14 +40,11 @@
                     </div>
                     <div class="form-group">
                         <p for="role">Spesialis</p>
-                        <select id="spesialis" name="spesialis" class="form-control">
-                            <option value="">--Pilih Spesialis--</option>
-                            <option {{ $dokter->spesialis == 'poli dalam' ? 'selected' : '' }} value="poli dalam">Poli
-                                Dalam</option>
-                            <option {{ $dokter->spesialis == 'umum' ? 'selected' : '' }} value="umum">Umum</option>
-                            <option {{ $dokter->spesialis == 'poli gigi' ? 'selected' : '' }} value="poli gigi">Poli
-                                Gigi
-                            </option>
+                        <select name="spesialis" id="" class="form-control">
+                            <option value="" {{ old('spesialis') == '' ? 'selected' : '' }}>--Pilih Spesialis--</option>
+                            @foreach ($getPoli as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama_poli }}</option>
+                            @endforeach
                         </select>
                         @foreach ($errors->get('spesialis') as $msg)
                             <p class="text-danger">{{ $msg }} </p>
@@ -58,10 +55,10 @@
                         <select id="jenis_kelamin" name="jenis_kelamin" class="form-control">
                             <option value="">--Pilih Jenis kelamin--</option>
 
-                            <option {{ $dokter->jenis_kelamin == 'laki laki' ? 'selected' : '' }} value="laki laki">Laki
+                            <option value="laki laki">Laki
                                 laki
                             </option>
-                            <option {{ $dokter->jenis_kelamin == 'perempuan' ? 'selected' : '' }} value="Perempuan">
+                            <option value="Perempuan">
                                 Perempuan
                             </option>
                         </select>

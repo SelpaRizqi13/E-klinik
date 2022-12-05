@@ -59,7 +59,7 @@
                                 <td>{{ $value->tanggal_lahir }}</td>
                                 <td>{{ $value->alamat }}</td>
                                 <td class="text-center">
-                                    <a class="btn btn-info btn-sm" href="{{ url('pasien/' . $value->id) }}"><i
+                                    <a class="btn btn-info btn-sm" href="{{ url('pemeriksaan/' . $value->id) }}"><i
                                             class="fa fa-eye"></i>
                                     </a>
                                     <a class="btn btn-success btn-sm" href="{{ url('pasien/' . $value->id . '/edit') }}">

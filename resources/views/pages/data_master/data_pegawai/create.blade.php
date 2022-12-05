@@ -43,10 +43,10 @@
                         <select id="jenis_kelamin" name="jenis_kelamin" class="form-control">
                             <option value="">--Pilih Jenis kelamin--</option>
 
-                            <option {{ $pegawai->jenis_kelamin == 'laki laki' ? 'selected' : '' }} value="laki laki">Laki
+                            <option value="laki laki">Laki
                                 laki
                             </option>
-                            <option {{ $pegawai->jenis_kelamin == 'perempuan' ? 'selected' : '' }} value="Perempuan">
+                            <option value="Perempuan">
                                 Perempuan
                             </option>
                         </select>
@@ -55,16 +55,12 @@
                         @endforeach
                     </div>
                     <div class="form-group">
-                        <p for="role">Jabatan</p>
-                        <select id="jabatan" name="jabatan" class="form-control">
-                            <option value="">--Pilih Jabatan--</option>
-                            <option {{ $pegawai->jabatan == 'poli dalam' ? 'selected' : '' }} value="poli dalam">
-                                Poli
-                                Dalam</option>
-                            <option {{ $pegawai->jabatan == 'umum' ? 'selected' : '' }} value="umum">Umum</option>
-                            <option {{ $pegawai->jabatan == 'poli gigi' ? 'selected' : '' }} value="poli gigi">Poli
-                                Gigi
-                            </option>
+                        <p for="">Jabatan</p>
+                        <select name="jabatan" id="" class="form-control">
+                            <option value="" {{ old('jabatan') == '' ? 'selected' : '' }}>--Pilih Jabatan--</option>
+                            @foreach ($getPoli as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama_poli }}</option>
+                            @endforeach
                         </select>
                         @foreach ($errors->get('jabatan') as $msg)
                             <p class="text-danger">{{ $msg }} </p>

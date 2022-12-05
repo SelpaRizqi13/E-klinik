@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dokter;
+use App\Models\Poli;
 use Illuminate\Http\Request;
 
 class DokterController extends Controller
@@ -12,11 +13,22 @@ class DokterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $dokters = Dokter::all();
+        
+        // $dokters = Dokter::with('poli');
 
-        return view('pages.data_master.data_dokter.index', compact('dokters'));
+        // return view('pages.data_master.data_dokter.index', compact('dokters'));
+
+        $keyword = $request->keyword;
+
+        
+        $dokters = Dokter::all();
+        // $dokters = Dokter::where('nama', 'LIKE', '%' . $keyword . '%')
+        //     ->paginate(5); //membuat data menjadi per page dengan data yang ditampilkan hanya 5
+        // $dokters->withPath('dokter'); //meminimalisir kesalahan url
+        // $dokters->appends($request->all()); //menelempar semua request yang diminta
+        return view('pages.data_master.data_dokter.index', compact('dokters', 'keyword'));
     }
 
     /**
@@ -26,9 +38,9 @@ class DokterController extends Controller
      */
     public function create()
     {
-        $dokter = new Dokter();
+        $getPoli = Poli::all();
 
-        return view('pages.data_master.data_dokter.create', compact('dokter'));
+        return view('pages.data_master.data_dokter.create', compact('getPoli'));
     }
 
     /**
@@ -44,7 +56,7 @@ class DokterController extends Controller
         $dokter->alamat = $request->alamat; 
         $dokter->tanggal_lahir = $request->tanggal_lahir; 
         $dokter->jenis_kelamin = $request->jenis_kelamin;
-        $dokter->spesialis = $request->spesialis; 
+        $dokter->poli_id = $request->spesialis; 
         $dokter->no_hp = $request->no_hp;
         $dokter->save();
 

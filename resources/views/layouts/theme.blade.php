@@ -11,11 +11,14 @@
         Web-Klinik
     </title>
     @include('includes.style')
+    @stack('add-script')
 </head>
 
-<body>
+<body class="g-sidenav-show">
 
-    <div class="min-height-300 bg-primary position-absolute w-100"></div>
+    <div class="min-height-300 bg-primary position-absolute w-100">
+
+    </div>
     @include('includes.sidebar')
     <main class="main-content border-radius-lg">
         @include('includes.navbar')

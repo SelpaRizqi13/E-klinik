@@ -21,7 +21,7 @@ class PegawaiTableSeeder extends Seeder
                 'nama_pegawai' => 'Selpa',
                 'tanggal_lahir'=>'1998-10-10',
                 'jenis_kelamin' =>'Perempuan',
-                'jabatan' => 'Apoteker',
+                'poli_id' => '1',
                 'no_hp'=>'087654654276',
                 'alamat' => 'Sukasari Majalaya'
             ],
@@ -29,7 +29,7 @@ class PegawaiTableSeeder extends Seeder
                 'nama_pegawai' => 'Selpa',
                 'tanggal_lahir'=>'1998-10-10',
                 'jenis_kelamin' =>'Perempuan',
-                'jabatan' => 'Pegawai Lab',
+                'poli_id' => '2',
                 'no_hp'=>'087654654276',
                 'alamat' => 'Sukasari Majalaya'
             ],
@@ -37,7 +37,7 @@ class PegawaiTableSeeder extends Seeder
                 'nama_pegawai' => 'Selpa',
                 'tanggal_lahir'=>'1998-10-10',
                 'jenis_kelamin' =>'Perempuan',
-                'jabatan' => 'Staff',
+                'poli_id' => '3',
                 'no_hp'=>'087654654276',
                 'alamat' => 'Sukasari Majalaya'
             ],
@@ -45,7 +45,7 @@ class PegawaiTableSeeder extends Seeder
                 'nama_pegawai' => 'elpa',
                 'tanggal_lahir'=>'1998-10-10',
                 'jenis_kelamin' =>'Perempuan',
-                'jabatan' => 'Apoteker',
+                'poli_id' => '4',
                 'no_hp'=>'087654654276',
                 'alamat' => 'Majalaya'
             ],
@@ -53,7 +53,7 @@ class PegawaiTableSeeder extends Seeder
                 'nama_pegawai' => 'Selpa',
                 'tanggal_lahir'=>'1998-10-10',
                 'jenis_kelamin' =>'Perempuan',
-                'jabatan' => 'Administrasi',
+                'poli_id' => '2',
                 'no_hp'=>'087654654276',
                 'alamat' => 'Sukasari Majalaya'
             ],
@@ -61,7 +61,7 @@ class PegawaiTableSeeder extends Seeder
                 'nama_pegawai' => 'Selpa Rizqi',
                 'tanggal_lahir'=>'1998-10-10',
                 'jenis_kelamin' =>'Perempuan',
-                'jabatan' => 'Pegawai Lab',
+                'poli_id' => '3',
                 'no_hp'=>'087654654276',
                 'alamat' => 'Sukasari'
             ],

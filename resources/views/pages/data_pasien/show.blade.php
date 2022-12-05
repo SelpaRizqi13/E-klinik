@@ -55,87 +55,10 @@
                 <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#obatModal"
                     data-bs-whatever="@fat">Input Obat</button>
 
-                {{-- modal tindakan --}}
-                <div class="modal fade" id="tindakanModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Input Tindakan</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Dilakukan oleh:</label>
-                                        <input type="text" class="form-control" id="recipient-name">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Nama tindakan:</label>
-                                        <input type="text" class="form-control" id="recipient-name">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Hasil periksa:</label>
-                                        <input type="text" class="form-control" id="recipient-name">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Perkembangan:</label>
-                                        <input type="text" class="form-control" id="recipient-name">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Masukan nama Dokter:</label>
-                                        <input type="text" class="form-control" id="recipient-name">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Masukan nama Petugas:</label>
-                                        <input type="text" class="form-control" id="recipient-name">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Simpan Data</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @include('includes.modal_tindakan')
+                @include('includes.modal_obat')
 
-                {{-- modal obat --}}
-                <div class="modal fade" id="obatModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Input Pemberian Obat</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Nama obat:</label>
-                                        <input type="text" class="form-control" id="recipient-name">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Quantity:</label>
-                                        <input type="text" class="form-control" id="recipient-name">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label ">Harga:</label>
-                                        <input type="text" class="form-control " id="recipient-name" disabled>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label ">Subtotal:</label>
-                                        <input type="text" class="form-control " id="recipient-name" disabled>
-                                    </div>
 
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Simpan Data</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -154,26 +77,40 @@
                     <thead>
 
                         <tr>
-                            <th>No</th>
+                            <th class="text-center">No</th>
                             <th>Tindakan</th>
-                            <th>Hasil Periksa</th>
+                            <th>Diagnosa</th>
                             <th>Perkembangan</th>
                             <th>Tanggal</th>
                             <th>Tarif</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>inpus</td>
-                            <td>ok</td>
-                            <td>ok</td>
-                            <td>200/09/01</td>
-                            <td>10000</td>
-                        </tr>
-                        <tr>
+                        <?php $no = 1; ?>
 
+                        @foreach ($pemeriksaan as $item)
+
+                            <tr>
+                                <td class="text-center">{{ $no }}</td>
+                                <td>{{ $item->tindakan->nama_tindakan }}</td>
+                                <td>{{ $item->diagnosa }}</td>
+                                <td>{{ $item->perkembangan }}</td>
+                                <td>{{ $item->tanggal_pemeriksaan }}</td>
+                                <td id="harga">Rp. {{ $item->tindakan->harga }}</td>
+                            </tr>
+                            <?php $no++; ?>
+
+                        @endforeach
+                        <tr>
+                            <td colspan="5" class="text-center">Total</td>
+                            @foreach ($pemeriksaan as $item)
+
+                                <td hidden>Rp.{{ $harga_total += $item->tindakan->harga }}</td>
+
+                            @endforeach
+                            <td> Rp. {{ $harga_total }}</td>
                         </tr>
+                        <tr></tr>
                     </tbody>
                 </table>
 
@@ -195,7 +132,7 @@
                     <thead>
 
                         <tr>
-                            <th>No</th>
+                            <th class="text-center">No</th>
                             <th>Nama Obat</th>
                             <th>Tanggal</th>
                             <th>Jumlah</th>
@@ -204,13 +141,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $no = 1; ?>
+                        @foreach ($getResep as $item)
+                            <tr>
+                                <td class="text-center">{{ $no }}</td>
+                                <td>{{ $item->obat->nama_obat }}</td>
+                                <td>{{ $item->tanggal_resep }}</td>
+                                <td class="text-center">{{ $jumlah_obat = $item->jumlah }}</td>
+                                <td>Rp. {{ $harga_obat = $item->obat->harga }}</td>
+                                <td>Rp. {{ $harga_totobat = $jumlah_obat * $harga_obat }}</td>
+                                <td hidden>Rp. {{ $total += $harga_totobat }}</td>
+                            </tr>
+                            <?php $no++; ?>
+                        @endforeach
                         <tr>
-                            <td>1</td>
-                            <td>inpus</td>
-                            <td>ok</td>
-                            <td>ok</td>
-                            <td>200/09/01</td>
-                            <td>10000</td>
+                            <td colspan="5" class="text-center">Total</td>
+                            <td>Rp. {{ $total }}</td>
                         </tr>
                         <tr>
 

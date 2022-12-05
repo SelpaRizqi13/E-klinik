@@ -15,6 +15,7 @@ class CreatePasiensTable extends Migration
     {
         Schema::create('pasiens', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('prov_id');
             $table->string('no_rm')->unique();
             $table->date('tanggal_pendaftaran');
             $table->string('nik');
@@ -27,7 +28,6 @@ class CreatePasiensTable extends Migration
             $table->string('status');
             $table->string('pekerjaan');
             $table->string('no_hp');
-            $table->string('provinsi');
             $table->string('kabupaten');
             $table->string('kecamatan');
             $table->string('desa');

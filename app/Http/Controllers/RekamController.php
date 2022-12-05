@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Pegawai;
-use App\Models\Dokter;
 use App\Models\Pasien;
-// use App\Models\Wilayah;
+use App\Models\Dokter;
+use App\Models\Pegawai;
 use App\Models\Tindakan;
-use App\Models\Obat;
-use App\Models\Tagihan;
-use DB;
-class DashboardController extends Controller
+use App\Models\Rekam;
+use App\Models\Pemeriksaan;
+use App\Models\Resep;
+use Illuminate\Http\Request;
+
+class RekamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,27 +20,15 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $users = User::count();
-        $pegawais = Pegawai::count();
-        $dokters = Dokter::count();
-        $pasiens = Pasien::count();
-        // $areas = Wilayah::count();
-        $tindakans = Tindakan::count();
-        $obats = Obat::count();
-        $tagihans = Tagihan::count();
-
-
-        $year = ['2022','2023','2024','2025'];
-
-        $user = [];
-        foreach ($year as $key => $value) {
-            $user[] = Pasien::where(\DB::raw("DATE_FORMAT(created_at, '%Y')"),$value)->count();
-        }
         
-        
+        $rekam=Rekam::all();
+        $pasien=Pasien::all();
+        $pemeriksaan=Pemeriksaan::all();
+        $resep=Resep::all();
+        $getdata=Rekam::with('pasien','pemeriksaan','resep');
 
-        return view('pages.dashboard.index', compact('users','pegawais','dokters','pasiens','tindakans','obats','tagihans'))->with('year',json_encode($year,JSON_NUMERIC_CHECK))->with('user',json_encode($user,JSON_NUMERIC_CHECK));
-        
+        return view('pages.tagihan.index', compact('rekam', 'pasien', 'pemeriksaan', 'resep', 'getdata'));
+
     }
 
     /**
@@ -51,7 +38,14 @@ class DashboardController extends Controller
      */
     public function create()
     {
-        //
+        $getPasien=Pasien::all();
+        $getDokter=Dokter::all();
+        $getPegawai=Pegawai::all();
+        $getTindakan=Tindakan::all();
+        $getObat=Obat::all();
+
+        return view('includes.modal_tindakan', compact('getPasien','getDokter','getPegawai','getTindakan','getObat'));
+
     }
 
     /**
@@ -62,7 +56,9 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rekam= new Rekam();
+        
+        $rekam->save();
     }
 
     /**
@@ -73,7 +69,13 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-        //
+        $pasien = Pasien::find($id);
+        $getPasien=Pasien::all();
+        $getDokter=Dokter::all();
+        $getPegawai=Pegawai::all();
+        $getTindakan=Tindakan::all();
+        // $getObat=Obat::all();
+        return view('pages.data_pasien.show', compact('pasien','getPasien','getDokter','getPegawai','getTindakan'));
     }
 
     /**

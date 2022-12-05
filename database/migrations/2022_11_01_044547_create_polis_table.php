@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePolisTable extends Migration
 {
-    /**
+    /** 
      * Run the migrations.
      *
      * @return void
@@ -19,7 +19,7 @@ class CreatePolisTable extends Migration
             $table->string('lantai');
             $table->timestamps();
         });
-    }
+    } 
 
     /**
      * Reverse the migrations.

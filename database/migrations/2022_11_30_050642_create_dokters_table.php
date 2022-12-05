@@ -15,11 +15,12 @@ class CreateDoktersTable extends Migration
     {
         Schema::create('dokters', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('poli_id')->unsigned();
+            $table->foreign('poli_id')->references('id')->on('polis')->onDelete('cascade');
             $table->string('nama');
             $table->string('alamat');
             $table->date('tanggal_lahir');
             $table->string('jenis_kelamin');
-            $table->string('spesialis');
             $table->string('no_hp');
             $table->timestamps();
         });

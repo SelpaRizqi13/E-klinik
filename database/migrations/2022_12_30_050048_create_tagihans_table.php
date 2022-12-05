@@ -15,6 +15,13 @@ class CreateTagihansTable extends Migration
     {
         Schema::create('tagihans', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('pasien_id')->unsigned();
+            $table->foreign('pasien_id')->references('id')->on('pasiens')->onDelete('cascade');
+            $table->bigInteger('pemeriksaan_id')->unsigned();
+            $table->foreign('pemeriksaan_id')->references('id')->on('pemeriksaans')->onDelete('cascade');
+            $table->bigInteger('resep_id')->unsigned();
+            $table->foreign('resep_id')->references('id')->on('reseps')->onDelete('cascade');
+            $table->string('total');
             $table->timestamps();
         });
     }

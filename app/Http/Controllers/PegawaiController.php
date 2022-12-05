@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
+use App\Models\Poli;
 use Illuminate\Http\Request;
 
 class PegawaiController extends Controller
@@ -12,10 +13,11 @@ class PegawaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $keyword = $request->keyword;
         $pegawais = Pegawai::all();
-        return view('pages.data_master.data_pegawai.index', compact('pegawais'));
+        return view('pages.data_master.data_pegawai.index', compact('pegawais','keyword'));
     }
 
     /**
@@ -25,8 +27,11 @@ class PegawaiController extends Controller
      */
     public function create()
     {
-        $pegawai = new Pegawai();
-        return view('pages.data_master.data_pegawai.create', compact('pegawai'));
+        $getPoli = Poli::all();
+
+        return view('pages.data_master.data_pegawai.create', compact('getPoli'));
+        
+        
     }
 
     /**
@@ -39,8 +44,9 @@ class PegawaiController extends Controller
     {
         $pegawai= new Pegawai();
         $pegawai->nama_pegawai = $request->nama_pegawai;
+        $pegawai->tanggal_lahir = $request->tanggal_lahir; 
         $pegawai->jenis_kelamin = $request->jenis_kelamin;
-        $pegawai->jabatan= $request->jabatan;
+        $pegawai->poli_id= $request->jabatan;
         $pegawai->no_hp = $request->no_hp;
         $pegawai->alamat = $request->alamat;
         $pegawai->save();
@@ -57,6 +63,8 @@ class PegawaiController extends Controller
     public function show($id)
     {
         $pegawai = Pegawai::find($id);
+        
+
         return view('pages.data_master.data_pegawai.show', compact('pegawai'));
     }
     

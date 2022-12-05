@@ -45,8 +45,8 @@
                             <option {{ $model->role == 'super admin' ? 'selected' : '' }} value="super admin">Super Admin
                             </option>
                             <option {{ $model->role == 'admin' ? 'selected' : '' }} value="admin">Admin</option>
-                            <option {{ $model->role == 'apoteker' ? 'selected' : '' }} value="apoteker">apoteker</option>
-                            <option {{ $model->role == 'dokter' ? 'selected' : '' }} value="dokter">dokter
+                            <option {{ $model->role == 'apoteker' ? 'selected' : '' }} value="apoteker">Apoteker</option>
+                            <option {{ $model->role == 'dokter' ? 'selected' : '' }} value="dokter">Dokter
                             </option>
                             {{-- <option {{ $model->role == 'dokter poli gigi' ? 'selected' : '' }} value="dokter poli gigi">
                                 dokter poli gigi</option> --}}

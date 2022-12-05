@@ -22,7 +22,7 @@ class DokterTableSeeder extends Seeder
                 'alamat'=>'Buah Batu',
                 'tanggal_lahir'=>'1990-01-13',
                 'jenis_kelamin'=>'laki laki',
-                'spesialis'=>'Umum',
+                'poli_id'=>'1',
                 'no_hp'=>'085768542654',
             ],
             [
@@ -30,7 +30,7 @@ class DokterTableSeeder extends Seeder
                 'alamat'=>'Kircon',
                 'tanggal_lahir'=>'1890-12-20',
                 'jenis_kelamin'=>'laki laki',
-                'spesialis'=>'Poli Dalam',
+                'poli_id'=>'2',
                 'no_hp'=>'081237892687',
             ],
             [
@@ -38,7 +38,7 @@ class DokterTableSeeder extends Seeder
                 'alamat'=>'Dago',
                 'tanggal_lahir'=>'1992-10-10',
                 'jenis_kelamin'=>'perempuan',
-                'spesialis'=>'Poli Gigi',
+                'poli_id'=>'1',
                 'no_hp'=>'085862453765',
             ],
             [
@@ -46,7 +46,7 @@ class DokterTableSeeder extends Seeder
                 'alamat'=>'Gatot Subroto',
                 'tanggal_lahir'=>'1990-08-18',
                 'jenis_kelamin'=>'perempuan',
-                'spesialis'=>'Poli Gigi',
+                'poli_id'=>'1',
                 'no_hp'=>'082456789243',
             ],
             [
@@ -54,7 +54,7 @@ class DokterTableSeeder extends Seeder
                 'alamat'=>'Antapani',
                 'tanggal_lahir'=>'1991-05-27',
                 'jenis_kelamin'=>'laki laki',
-                'spesialis'=>'Poli Umum',
+                'poli_id'=>'2',
                 'no_hp'=>'087456276876',
             ],
         ];

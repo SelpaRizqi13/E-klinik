@@ -32,7 +32,7 @@ class PasienTableSeeder extends Seeder
                 'status'=>'belum menikah',
                 'pekerjaan'=>'buruh',
                 'no_hp'=>'089765748378',
-                'provinsi'=>'Jawa Barat',
+                'prov_id'=>'32',
                 'kabupaten'=>'bandung',
                 'kecamatan'=>'paseh',
                 'desa'=>'mekarpawitan',

@@ -19,7 +19,7 @@ class ObatTableSeeder extends Seeder
         //
         $obats =[
             [
-                'kode_obat'=>'OB001',
+                'kode_obat'=>'OB-0001',
                 'nama_obat'=>'Pondex',
                 'jenis_obat'=>'Sirup',
                 'kategori'=>'Analgestik',
@@ -27,7 +27,7 @@ class ObatTableSeeder extends Seeder
                 'harga'=>'50000',
             ],
             [
-                'kode_obat'=>'OB002',
+                'kode_obat'=>'OB-0002',
                 'nama_obat'=>'Ponstan',
                 'jenis_obat'=>'Sirup',
                 'kategori'=>'Analgestik',
@@ -35,7 +35,7 @@ class ObatTableSeeder extends Seeder
                 'harga'=>'33500',
             ],
             [
-                'kode_obat'=>'OB003',
+                'kode_obat'=>'OB-0003',
                 'nama_obat'=>'Pamol',
                 'jenis_obat'=>'Strip',
                 'kategori'=>'Demam',
@@ -43,7 +43,7 @@ class ObatTableSeeder extends Seeder
                 'harga'=>'1700',
             ],
             [
-                'kode_obat'=>'OB004',
+                'kode_obat'=>'OB-0004',
                 'nama_obat'=>'Kaflam 50 mg',
                 'jenis_obat'=>'Butir',
                 'kategori'=>'Anti Infalamasi',
@@ -51,7 +51,7 @@ class ObatTableSeeder extends Seeder
                 'harga'=>'3500',
             ],
             [
-                'kode_obat'=>'OB005',
+                'kode_obat'=>'OB-0005',
                 'nama_obat'=>'Cataflam 25 mg',
                 'jenis_obat'=>'Kapsul',
                 'kategori'=>'Anti Infalamasi',

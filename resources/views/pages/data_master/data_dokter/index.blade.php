@@ -53,7 +53,7 @@
                                 <td>{{ $no }}</td>
                                 <td>{{ $value->nama }}</td>
                                 <td>{{ $value->tanggal_lahir }}</td>
-                                <td>{{ $value->spesialis }}</td>
+                                <td>{{ $value->poli->nama_poli }}</td>
                                 <td>{{ $value->no_hp }}</td>
                                 <td>{{ $value->alamat }}</td>
                                 <td class="text-center">
